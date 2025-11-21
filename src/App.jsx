@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Home from "./pages/Home";
+import AddTask from "./pages/AddTask";
+import ViewTasks from "./pages/ViewTasks";
 
-function App() {
+export default function App() {
   const [page, setPage] = useState("home");
 
   const handleNavigation = (nextPage) => {
@@ -11,10 +13,8 @@ function App() {
   return (
     <>
       {page === "home" && <Home onNavigate={handleNavigation} />}
-      {page === "add" && <div>Add Task Screen Coming Soon...</div>}
-      {page === "view" && <div>View Tasks Screen Coming Soon...</div>}
+      {page === "add" && <AddTask onNavigate={handleNavigation} />}
+      {page === "view" && <ViewTasks onNavigate={handleNavigation} />}
     </>
   );
 }
-
-export default App;

@@ -21,14 +21,14 @@ export default function Home({ onNavigate }) {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <button
-            onClick={() => onNavigate("login")}
+            onClick={() => onNavigate("add")}
             className="bg-white text-blue-600 font-semibold px-8 py-3 rounded-xl shadow-md hover:bg-blue-100 hover:scale-105 transition-all duration-200"
           >
             Add Tasks
           </button>
 
           <button
-            onClick={() => onNavigate("register")}
+            onClick={() => onNavigate("view")}
             className="bg-blue-900 text-white font-semibold px-8 py-3 rounded-xl shadow-md hover:bg-blue-800 hover:scale-105 transition-all duration-200"
           >
             View Tasks

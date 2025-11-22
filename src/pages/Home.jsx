@@ -76,7 +76,7 @@ export default function Home() {
         <div className="text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-8 border border-white/30">
             <Star className="w-4 h-4 text-yellow-300" />
-            <span className="text-sm text-white">Trusted by 10,000+ users worldwide</span>
+            <span className="text-sm text-white">Boost Your Productivity by 3x</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">

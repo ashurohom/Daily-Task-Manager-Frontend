@@ -104,6 +104,30 @@ export default function ViewTasks() {
             </div>
           </div>
         </div>
+
+              {/* Stats */}
+      {tasks.length > 0 && (
+        <div className="mt-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl p-6 text-white">
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div className="text-2xl font-bold">{tasks.length}</div>
+              <div className="text-blue-100 text-sm">Total</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold">
+                {tasks.filter(t => t.status === 'completed').length}
+              </div>
+              <div className="text-blue-100 text-sm">Completed</div>
+            </div>
+            <div>
+              <div className="text-2xl font-bold">
+                {tasks.filter(t => t.status === 'pending').length}
+              </div>
+              <div className="text-blue-100 text-sm">Pending</div>
+            </div>
+          </div>
+        </div>
+      )}
       </div>
 
       {/* Tasks Grid */}
@@ -186,29 +210,7 @@ export default function ViewTasks() {
         </div>
       )}
 
-      {/* Stats */}
-      {tasks.length > 0 && (
-        <div className="mt-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl p-6 text-white">
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold">{tasks.length}</div>
-              <div className="text-blue-100 text-sm">Total</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">
-                {tasks.filter(t => t.status === 'completed').length}
-              </div>
-              <div className="text-blue-100 text-sm">Completed</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">
-                {tasks.filter(t => t.status === 'pending').length}
-              </div>
-              <div className="text-blue-100 text-sm">Pending</div>
-            </div>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }

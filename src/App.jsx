@@ -1,4 +1,4 @@
-// App.jsx - Updated with navigation layout
+// App.jsx - Updated with conditional layout
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import AddTask from "./pages/AddTask";
@@ -9,14 +9,27 @@ import Layout from "./components/Layout";
 export default function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/add" element={<AddTask />} />
-          <Route path="/view" element={<ViewTasks />} />
-          <Route path="/update/:id" element={<UpdateTask />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        {/* Home page without Layout wrapper */}
+        <Route path="/" element={<Home />} />
+        
+        {/* Other pages with Layout wrapper */}
+        <Route path="/add" element={
+          <Layout>
+            <AddTask />
+          </Layout>
+        } />
+        <Route path="/view" element={
+          <Layout>
+            <ViewTasks />
+          </Layout>
+        } />
+        <Route path="/update/:id" element={
+          <Layout>
+            <UpdateTask />
+          </Layout>
+        } />
+      </Routes>
     </Router>
   );
 }

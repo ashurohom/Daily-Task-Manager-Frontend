@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function ViewTasks() {
@@ -35,8 +36,13 @@ export default function ViewTasks() {
   };
 
   // 🟧 Update button (navigate page)
+  // const updateTask = (id) => {
+  //   window.location.href = `/update/${id}`;  
+
+  const navigate = useNavigate();
+
   const updateTask = (id) => {
-    window.location.href = `/update/${id}`;  
+    navigate(`/update/${id}`);
   };
 
   return (

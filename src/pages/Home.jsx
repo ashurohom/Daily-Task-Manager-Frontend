@@ -1,15 +1,13 @@
-import { CheckCircle, Calendar, ClipboardList } from "lucide-react";
+// Home.jsx - Safe version without icons
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const navigate = useNavigate();  // ⭐ FIXED — Router navigation
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-600 to-blue-400 text-white flex flex-col">
-
       {/* Main Section */}
       <div className="flex flex-col items-center justify-center flex-1 px-6 py-16">
-
         {/* Heading */}
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-wide mb-4 text-center drop-shadow-lg">
           Daily Task Manager
@@ -24,14 +22,14 @@ export default function Home() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <button
-            onClick={() => navigate("/add")}   // ⭐ FIXED
+            onClick={() => navigate("/add")}
             className="bg-white text-blue-600 font-semibold px-8 py-3 rounded-xl shadow-md hover:bg-blue-100 hover:scale-105 transition-all duration-200"
           >
             Add Tasks
           </button>
 
           <button
-            onClick={() => navigate("/view")}  // ⭐ FIXED
+            onClick={() => navigate("/view")}
             className="bg-blue-900 text-white font-semibold px-8 py-3 rounded-xl shadow-md hover:bg-blue-800 hover:scale-105 transition-all duration-200"
           >
             View Tasks
@@ -41,16 +39,13 @@ export default function Home() {
 
       {/* Features Section */}
       <div className="bg-white text-blue-900 w-full rounded-t-3xl px-6 py-12 shadow-2xl">
-
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
           Why Use Daily Task Manager?
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-
           {/* Feature 1 */}
           <div className="bg-blue-50 p-6 rounded-2xl shadow hover:scale-105 transition-all">
-            <CheckCircle size={40} className="text-blue-600 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Stay Organized</h3>
             <p className="text-blue-700">
               Easily add, edit, and manage tasks with clean and simple controls.
@@ -59,7 +54,6 @@ export default function Home() {
 
           {/* Feature 2 */}
           <div className="bg-blue-50 p-6 rounded-2xl shadow hover:scale-105 transition-all">
-            <Calendar size={40} className="text-blue-600 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Daily Planning</h3>
             <p className="text-blue-700">
               Plan your day in advance and track your progress instantly.
@@ -68,13 +62,11 @@ export default function Home() {
 
           {/* Feature 3 */}
           <div className="bg-blue-50 p-6 rounded-2xl shadow hover:scale-105 transition-all">
-            <ClipboardList size={40} className="text-blue-600 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Track Everything</h3>
             <p className="text-blue-700">
               Get a full overview of completed, pending, and upcoming tasks.
             </p>
           </div>
-
         </div>
       </div>
 

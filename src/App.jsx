@@ -15,6 +15,7 @@ export default function App() {
       {page === "home" && <Home onNavigate={handleNavigation} />}
       {page === "add" && <AddTask onNavigate={handleNavigation} />}
       {page === "view" && <ViewTasks onNavigate={handleNavigation} />}
+      
     </>
   );
 }

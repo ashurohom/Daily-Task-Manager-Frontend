@@ -1,4 +1,4 @@
-// AddTask.jsx - Enhanced mobile form
+// AddTask.jsx - Enhanced with better error handling and debugging
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Save, Calendar, Flag, Clipboard, Star } from "lucide-react";
@@ -22,14 +22,29 @@ function AddTask() {
     e.preventDefault();
     setLoading(true);
 
+    // Prepare data with proper values
+    const submitData = {
+      title: formData.title.trim(),
+      description: formData.description.trim() || "", // Ensure string
+      due_date: formData.due_date || null, // Send null if empty
+      status: formData.status,
+      priority: formData.priority,
+    };
+
+    console.log("📤 Sending data to backend:", submitData);
+
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/posts/create/", {
+      const response = await fetch("https://daily-task-manager-backend-production.up.railway.app/api/posts/create/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submitData),
       });
+
+      const responseData = await response.json();
+      console.log("📥 Response status:", response.status);
+      console.log("📥 Response data:", responseData);
 
       if (response.ok) {
         // Show success message
@@ -50,11 +65,24 @@ function AddTask() {
         // Navigate back after short delay
         setTimeout(() => navigate("/view"), 1000);
       } else {
-        throw new Error('Failed to create task');
+        console.error("❌ Server error:", responseData);
+        
+        // Show detailed error message
+        let errorMessage = 'Failed to create task!';
+        if (responseData.error) {
+          errorMessage = responseData.error;
+        } else if (responseData.details) {
+          errorMessage = `Validation error: ${JSON.stringify(responseData.details)}`;
+        } else if (responseData.message) {
+          errorMessage = responseData.message;
+        }
+        
+        throw new Error(errorMessage);
       }
     } catch (error) {
+      console.error("💥 Fetch error:", error);
       const errorEvent = new CustomEvent('taskError', { 
-        detail: { message: 'Failed to create task!', type: 'error' } 
+        detail: { message: `Failed: ${error.message}`, type: 'error' } 
       });
       window.dispatchEvent(errorEvent);
     } finally {
@@ -80,7 +108,7 @@ function AddTask() {
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
               <Clipboard size={16} />
-              Task Title
+              Task Title *
             </label>
             <input
               type="text"
@@ -90,6 +118,7 @@ function AddTask() {
               className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               placeholder="Enter task title..."
               required
+              minLength="1"
             />
           </div>
 

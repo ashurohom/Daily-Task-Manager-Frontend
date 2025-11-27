@@ -1,8 +1,11 @@
-// UpdateTask.jsx - Enhanced with better design
+// UpdateTask.jsx - Fully Corrected for Live Railway API
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Save, Calendar, Flag, Clipboard, Star } from "lucide-react";
+
+// 🌍 Your Railway LIVE API Base URL
+const API_BASE = "https://daily-task-manager-backend-production.up.railway.app/api/posts";
 
 export default function UpdateTask() {
   const { id } = useParams();
@@ -17,29 +20,23 @@ export default function UpdateTask() {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
 
+  // ✅ FETCH SINGLE TASK
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:8000/api/posts/list/");
-        const foundTask = res.data.find((t) => t.id === Number(id));
+        const res = await axios.get(`${API_BASE}/update/${id}/`);  // ← CHANGE 'detail' to 'update'
 
-        if (!foundTask) {
-          const errorEvent = new CustomEvent('taskError', { 
-            detail: { message: 'Task not found!', type: 'error' } 
-          });
-          window.dispatchEvent(errorEvent);
-          navigate("/view");
-        } else {
-          setTask(foundTask);
-          setLoading(false);
-        }
+        setTask(res.data);
+        setLoading(false);
       } catch (err) {
         console.error("Error loading task:", err);
-        const errorEvent = new CustomEvent('taskError', { 
-          detail: { message: 'Error loading task!', type: 'error' } 
+
+        const errorEvent = new CustomEvent("taskError", {
+          detail: { message: "Task not found!", type: "error" },
         });
         window.dispatchEvent(errorEvent);
-        setLoading(false);
+
+        navigate("/view");
       }
     };
 
@@ -50,28 +47,28 @@ export default function UpdateTask() {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
 
+  // ✅ UPDATE TASK
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUpdating(true);
 
     try {
-      await axios.put(
-        `http://127.0.0.1:8000/api/posts/update/${id}/`,
-        task
-      );
+      await axios.put(`${API_BASE}/update/${id}/`, task);
 
-      const successEvent = new CustomEvent('taskSuccess', { 
-        detail: { message: 'Task updated successfully!', type: 'success' } 
+      const successEvent = new CustomEvent("taskSuccess", {
+        detail: { message: "Task updated successfully!", type: "success" },
       });
       window.dispatchEvent(successEvent);
-      
-      setTimeout(() => navigate("/view"), 1000);
+
+      setTimeout(() => navigate("/view"), 800);
     } catch (error) {
       console.error("Update failed:", error);
-      const errorEvent = new CustomEvent('taskError', { 
-        detail: { message: 'Error updating task!', type: 'error' } 
+
+      const errorEvent = new CustomEvent("taskError", {
+        detail: { message: "Error updating task!", type: "error" },
       });
       window.dispatchEvent(errorEvent);
+
       setUpdating(false);
     }
   };
@@ -87,7 +84,8 @@ export default function UpdateTask() {
   return (
     <div className="max-w-md mx-auto">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        {/* Form Header */}
+
+        {/* Header */}
         <div className="bg-gradient-to-r from-green-500 to-blue-500 p-6 text-white">
           <h1 className="text-2xl font-bold flex items-center gap-3">
             <Save size={28} />
@@ -143,9 +141,8 @@ export default function UpdateTask() {
             />
           </div>
 
-          {/* Priority & Status Row */}
+          {/* Priority + Status */}
           <div className="grid grid-cols-2 gap-4">
-            {/* Priority */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
                 <Flag size={16} />
@@ -163,7 +160,6 @@ export default function UpdateTask() {
               </select>
             </div>
 
-            {/* Status */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
                 <Star size={16} />
@@ -182,7 +178,7 @@ export default function UpdateTask() {
             </div>
           </div>
 
-          {/* Action Buttons */}
+          {/* Buttons */}
           <div className="flex gap-3">
             <button
               type="button"
@@ -191,10 +187,11 @@ export default function UpdateTask() {
             >
               Cancel
             </button>
+
             <button
               type="submit"
               disabled={updating}
-              className="flex-1 bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all disabled:opacity-50"
             >
               {updating ? (
                 <div className="flex items-center justify-center gap-2">

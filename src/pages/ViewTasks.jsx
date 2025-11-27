@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Edit3, Trash2, Calendar, Flag, Filter } from "lucide-react";
+import { Edit3, Trash2, Calendar, Flag, Filter, Clipboard } from "lucide-react"; // Added Clipboard import
 
 export default function ViewTasks() {
   const [tasks, setTasks] = useState([]);
@@ -12,7 +12,7 @@ export default function ViewTasks() {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/posts/list/");
+      const response = await axios.get("https://daily-task-manager-backend-production.up.railway.app/api/posts/list/");
       setTasks(response.data);
       setLoading(false);
     } catch (error) {
@@ -29,7 +29,7 @@ export default function ViewTasks() {
     if (!window.confirm("Are you sure you want to delete this task?")) return;
 
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/posts/delete/${id}/`);
+      await axios.delete(`https://daily-task-manager-backend-production.up.railway.app/api/posts/delete/${id}/`);
       const successEvent = new CustomEvent('taskSuccess', { 
         detail: { message: 'Task deleted successfully!', type: 'success' } 
       });
@@ -105,29 +105,29 @@ export default function ViewTasks() {
           </div>
         </div>
 
-              {/* Stats */}
-      {tasks.length > 0 && (
-        <div className="mt-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl p-6 text-white">
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div className="text-2xl font-bold">{tasks.length}</div>
-              <div className="text-blue-100 text-sm">Total</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">
-                {tasks.filter(t => t.status === 'completed').length}
+        {/* Stats */}
+        {tasks.length > 0 && (
+          <div className="mt-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl p-6 text-white">
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div>
+                <div className="text-2xl font-bold">{tasks.length}</div>
+                <div className="text-blue-100 text-sm">Total</div>
               </div>
-              <div className="text-blue-100 text-sm">Completed</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">
-                {tasks.filter(t => t.status === 'pending').length}
+              <div>
+                <div className="text-2xl font-bold">
+                  {tasks.filter(t => t.status === 'completed').length}
+                </div>
+                <div className="text-blue-100 text-sm">Completed</div>
               </div>
-              <div className="text-blue-100 text-sm">Pending</div>
+              <div>
+                <div className="text-2xl font-bold">
+                  {tasks.filter(t => t.status === 'pending').length}
+                </div>
+                <div className="text-blue-100 text-sm">Pending</div>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
 
       {/* Tasks Grid */}
@@ -181,7 +181,7 @@ export default function ViewTasks() {
                     {task.due_date && (
                       <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium text-gray-600 bg-gray-50">
                         <Calendar size={12} />
-                        {task.due_date}
+                        {new Date(task.due_date).toLocaleDateString()} {/* Format date */}
                       </span>
                     )}
                   </div>
@@ -209,8 +209,6 @@ export default function ViewTasks() {
           ))}
         </div>
       )}
-
-
     </div>
   );
 }

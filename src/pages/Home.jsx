@@ -99,10 +99,10 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center px-4 pt-20 pb-16">
         <div className="text-center max-w-4xl mx-auto">
           {/* Creator Badge */}
-          <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-8 border border-white/30">
+          {/* <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-8 border border-white/30">
             <Star className="w-4 h-4 text-yellow-300" />
             <span className="text-sm text-white">Crafted with ❤️ by Ashitosh</span>
-          </div>
+          </div> */}
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             Organize Your

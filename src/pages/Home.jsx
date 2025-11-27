@@ -1,4 +1,4 @@
-// Home.jsx - Updated with Profile Icon only
+// Home.jsx - Updated with "Get Started" button hidden on mobile
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, Calendar, Target, Rocket, TrendingUp, Users, Star, ArrowRight, Plus, User, ExternalLink } from "lucide-react";
 
@@ -68,9 +68,10 @@ export default function Home() {
                 My Tasks
               </button>
               
+              {/* Get Started Button - Hidden on mobile */}
               <button 
                 onClick={() => navigate("/add")}
-                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-6 py-2 rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-105 font-medium"
+                className="hidden md:flex bg-white/20 backdrop-blur-sm border border-white/30 text-white px-6 py-2 rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-105 font-medium"
               >
                 Get Started
               </button>

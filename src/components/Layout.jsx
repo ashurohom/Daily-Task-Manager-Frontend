@@ -1,4 +1,4 @@
-// components/Layout.jsx - New component for consistent navigation
+// components/Layout.jsx - Updated with Home screen button
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, Home, Plus, List } from "lucide-react";
 
@@ -7,6 +7,7 @@ export default function Layout({ children }) {
   const navigate = useNavigate();
 
   const showBackButton = location.pathname !== "/";
+  const showHomeButton = location.pathname !== "/";
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -19,6 +20,7 @@ export default function Layout({ children }) {
                 <button
                   onClick={() => navigate(-1)}
                   className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+                  title="Go Back"
                 >
                   <ArrowLeft size={20} />
                 </button>
@@ -26,13 +28,26 @@ export default function Layout({ children }) {
               <h1 className="text-xl font-bold">Task Manager</h1>
             </div>
             
-            {location.pathname === "/" && (
-              <div className="flex items-center space-x-1">
+            <div className="flex items-center space-x-2">
+              {/* Home Screen Button - Shows on all pages except home */}
+              {showHomeButton && (
+                <button
+                  onClick={() => navigate("/")}
+                  className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors flex items-center space-x-1"
+                  title="Go to Home Screen"
+                >
+                  <Home size={18} />
+                  <span className="text-sm hidden sm:inline">Home</span>
+                </button>
+              )}
+              
+              {/* Version badge - Only shows on home page */}
+              {location.pathname === "/" && (
                 <span className="text-sm bg-white/20 px-2 py-1 rounded-full">
                   v1.0
                 </span>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </header>

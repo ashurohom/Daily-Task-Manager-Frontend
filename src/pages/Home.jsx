@@ -76,7 +76,7 @@ export default function Home() {
                 Get Started
               </button>
               
-              {/* Profile Icon with Portfolio Link */}
+              {/* Portfolio Profile Icon */}
               <a 
                 href="https://ashitoshrohom.netlify.app" 
                 target="_blank" 

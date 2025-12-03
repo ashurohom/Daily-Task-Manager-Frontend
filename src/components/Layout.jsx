@@ -2,6 +2,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, Home, Plus, List } from "lucide-react";
 
+// Layout component wrapping pages with header and bottom nav
 export default function Layout({ children }) {
   const location = useLocation();
   const navigate = useNavigate();

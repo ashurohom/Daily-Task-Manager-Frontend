@@ -14,7 +14,7 @@ export default function Notification() {
       
       setTimeout(() => setNotification(null), 3000);
     };
-
+// Handle task error events
     const handleTaskError = (event) => {
       setNotification({
         message: event.detail.message,

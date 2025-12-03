@@ -32,7 +32,7 @@ export default function Notification() {
       window.removeEventListener('taskError', handleTaskError);
     };
   }, []);
-
+// If no notification, render nothing
   if (!notification) return null;
 
   const isSuccess = notification.type === 'success';

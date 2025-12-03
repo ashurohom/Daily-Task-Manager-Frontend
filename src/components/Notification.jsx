@@ -4,7 +4,7 @@ import { CheckCircle, XCircle, X } from 'lucide-react';
 
 export default function Notification() {
   const [notification, setNotification] = useState(null);
-
+// Notify on task success or error events
   useEffect(() => {
     const handleTaskSuccess = (event) => {
       setNotification({

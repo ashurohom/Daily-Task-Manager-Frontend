@@ -65,7 +65,7 @@ function AddTask() {
         // Navigate back after short delay
         setTimeout(() => navigate("/view"), 1000);
       } else {
-        console.error("❌ Server error:", responseData);
+        console.error("Server error:", responseData);
         
         // Show detailed error message
         let errorMessage = 'Failed to create task!';
@@ -80,7 +80,7 @@ function AddTask() {
         throw new Error(errorMessage);
       }
     } catch (error) {
-      console.error("💥 Fetch error:", error);
+      console.error("Fetch error:", error);
       const errorEvent = new CustomEvent('taskError', { 
         detail: { message: `Failed: ${error.message}`, type: 'error' } 
       });

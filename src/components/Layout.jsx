@@ -7,6 +7,7 @@ export default function Layout({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
 
+// Determine visibility of back and home buttons  
   const showBackButton = location.pathname !== "/";
   const showHomeButton = location.pathname !== "/";
 

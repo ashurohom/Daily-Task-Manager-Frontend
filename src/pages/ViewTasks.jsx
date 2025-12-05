@@ -114,7 +114,7 @@ export default function ViewTasks() {
   // Calculate displayed tasks range
   const startTask = (currentPage - 1) * pageSize + 1;
   const endTask = Math.min(currentPage * pageSize, totalTasks);
-
+  // loading state
   if (loading) {
     return (
       <div className="flex justify-center items-center py-12">

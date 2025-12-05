@@ -27,7 +27,7 @@ export default function Layout({ children }) {
                   <ArrowLeft size={20} />
                 </button>
               )}
-              <h1 className="text-xl font-bold">Task Manager</h1>
+              <h1 className="text-xl font-bold">Task Manager</h1> 
             </div>
             
             <div className="flex items-center space-x-2">
@@ -54,7 +54,7 @@ export default function Layout({ children }) {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Main Content Of Page */}
       <main className="container mx-auto px-4 py-6 pb-20">
         {children}
       </main>

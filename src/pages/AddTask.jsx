@@ -172,7 +172,7 @@ function AddTask() {
               </select>
             </div>
 
-            {/* Status */}
+            {/* Show Status */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
                 <Star size={16} />

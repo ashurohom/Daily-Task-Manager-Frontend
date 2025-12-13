@@ -64,7 +64,7 @@ export default function ViewTasks() {
       window.dispatchEvent(errorEvent);
     }
   };
-
+// Navigate to update page
   const updateTask = (id) => {
     navigate(`/update/${id}`);
   };

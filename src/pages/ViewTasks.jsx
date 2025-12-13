@@ -76,6 +76,7 @@ export default function ViewTasks() {
     }
   };
 
+  // Next and Previous handlers
   const goToNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
